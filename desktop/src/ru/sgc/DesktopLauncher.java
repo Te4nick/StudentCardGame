@@ -1,8 +1,9 @@
 package ru.sgc;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import ru.sgc.StudentCardGame;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
@@ -10,6 +11,9 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("SCG");
-		new Lwjgl3Application(new StudentCardGame(), config);
+		new Lwjgl3Application(new StudentCardGame(), config); // original lines
+
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		Gdx.app.log("ru", Localizator.getString("title"));
 	}
 }

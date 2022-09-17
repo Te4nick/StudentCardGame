@@ -1,25 +1,25 @@
 package ru.sgc;
 
 public class Card {
-    private String frameText;
-    private String leftText;
-    private String rightText;
+    private final String lineM;
+    private final String lineL;
+    private final String LineR;
 
-    Card(String frameText, String leftText, String rightText) {
-        this.frameText = frameText;
-        this.leftText = leftText;
-        this.rightText = rightText;
+    Card(String lineM, String lineL, String LineR) {
+        this.lineM = lineM;
+        this.lineL = lineL;
+        this.LineR = LineR;
     }
 
-    public String getFrameText() {
-        return frameText;
+    public String getLineM() {
+        return lineM;
     }
 
-    public String getLeftText() {
-        return leftText;
+    public String getLineL() {
+        return lineL;
     }
 
-    public String getRightText() {
-        return rightText;
+    public String getLineR() {
+        return LineR;
     }
 }

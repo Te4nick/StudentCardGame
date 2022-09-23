@@ -1,4 +1,4 @@
-package ru.sgc;
+package ru.scg;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,20 +14,20 @@ public class Deck {
 
     }
 
-    private void buildDeck() {
-        Map<String, String> cardLines = Map.of(
-                "wu_m", "You woke up in your bed.", // Wake up card
-                "wu_l", "Naaah, lemme sleep more!",
-                "wu_r", "Well, time to wake up...",
-                "bf_m", "Should I have a breakfast?", // Breakfast card
-                "bf_l", "Yeah, nice idea.",
-                "bf_r", "Not in the mood rn"
-        );
-        Set<String> cardKeys = new HashSet<>(Arrays.asList("wu", "bf"));
-        for (String key : cardKeys) {
-            cardDeck.put(key, new Card(cardLines.get(key + "_m"), cardLines.get(key + "_l"), cardLines.get(key + "_r")));
-        }
-    }
+//    private void buildDeck() {
+//        Map<String, String> cardLines = Map.of(
+//                "wu_m", "You woke up in your bed.", // Wake up card
+//                "wu_l", "Naaah, lemme sleep more!",
+//                "wu_r", "Well, time to wake up...",
+//                "bf_m", "Should I have a breakfast?", // Breakfast card
+//                "bf_l", "Yeah, nice idea.",
+//                "bf_r", "Not in the mood rn"
+//        );
+//        Set<String> cardKeys = new HashSet<>(Arrays.asList("wu", "bf"));
+//        for (String key : cardKeys) {
+//            cardDeck.put(key, new Card(cardLines.get(key + "_m"), cardLines.get(key + "_l"), cardLines.get(key + "_r")));
+//        }
+//    }
 
     public void put(String cardKey, String lineM, String lineL, String lineR) {
         cardDeck.put(cardKey, new Card(lineM, lineL, lineR));

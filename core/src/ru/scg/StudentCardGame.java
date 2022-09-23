@@ -1,4 +1,4 @@
-package ru.sgc;
+package ru.scg;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,6 +13,9 @@ public class StudentCardGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
+		System.out.println(Localizator.getString("game"));
+		Localizator.setLocale("ru");
+		System.out.println(Localizator.getString("game"));
 	}
 
 	@Override

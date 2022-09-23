@@ -1,4 +1,4 @@
-package ru.sgc;
+package ru.scg;
 
 public class Card {
     private final String lineM;

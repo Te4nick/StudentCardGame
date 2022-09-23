@@ -1,10 +1,9 @@
-package ru.sgc;
+package ru.scg;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import ru.sgc.StudentCardGame;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

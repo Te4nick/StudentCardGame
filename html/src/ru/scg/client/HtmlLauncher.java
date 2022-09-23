@@ -1,9 +1,9 @@
-package ru.sgc.client;
+package ru.scg.client;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import ru.sgc.StudentCardGame;
+import ru.scg.StudentCardGame;
 
 public class HtmlLauncher extends GwtApplication {
 

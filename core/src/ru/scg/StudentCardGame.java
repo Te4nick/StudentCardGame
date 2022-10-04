@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.util.HashMap;
+
 public class StudentCardGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
@@ -14,8 +16,11 @@ public class StudentCardGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		System.out.println(Localizator.getString("game"));
-		Localizator.setLocale("ru");
-		System.out.println(Localizator.getString("game"));
+		// Localizator.setLocaleDefault(Localizator.LOCALE_RU);
+		// System.out.println(Localizator.getString("game"));
+		HashMap<String, Card> deck = AssetManager.buildDeck();
+		String[] cKeys = AssetManager.getCardKeys();
+		System.out.println(deck.get(cKeys[2]).toString());
 	}
 
 	@Override

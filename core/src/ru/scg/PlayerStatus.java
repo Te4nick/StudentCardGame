@@ -12,8 +12,6 @@ public final class PlayerStatus {
     private static final short DROPPEDOUT = 3;
     private static final short BROKE = 4;
 
-
-
     private PlayerStatus () {}
 
     private static int checkStatus() {
@@ -25,7 +23,7 @@ public final class PlayerStatus {
      *
      * @param data - Formatted string "-1 5 10 -15"
      */
-    public static void update (String data) {
+    public static void update(String data) {
         String[] s = data.split(" ");
         health += Integer.parseInt(s[0]);
         mental += Integer.parseInt(s[1]);
@@ -33,7 +31,7 @@ public final class PlayerStatus {
         money += Integer.parseInt(s[3]);
     }
 
-    public static void update (int[] data) {
+    public static void update(int[] data) {
         health += data[0];
         mental += data[1];
         study += data[2];

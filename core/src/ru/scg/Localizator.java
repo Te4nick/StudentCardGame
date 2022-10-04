@@ -1,23 +1,21 @@
 package ru.scg;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 public final class Localizator {
+    public static final int LOCALE_EN = 0;
+    public static final int LOCALE_RU = 1;
 
-    private static final I18NBundle locale =
+    private static final I18NBundle localeDefault =
             I18NBundle.createBundle(Gdx.files.internal("i18n/locale_en"),
                     Locale.ENGLISH);
     private static final I18NBundle localeRU =
             I18NBundle.createBundle(Gdx.files.internal("i18n/locale_ru"),
                     new Locale("ru"));
-    private static String currentLocale = "en";
+    private static int currentLocale = 0;
 
     private Localizator() {}
 
@@ -25,16 +23,16 @@ public final class Localizator {
      * Changes game locale. Supported values are: "en", "ru".
      * Default value is "en" if locale is not found.
      */
-    public static void setLocale(String l) {
-        if (l.equals("en") | l.equals("ru")) currentLocale = l;
+    public static void setLocaleDefault(int l) {
+        if (l == LOCALE_EN | l == LOCALE_RU) currentLocale = l;
     }
 
     public static String getString(String key) {
         switch (currentLocale) {
-            case "ru":
+            case 1:
                 return localeRU.get(key);
             default:
-                return locale.get(key);
+                return localeDefault.get(key);
         }
 //        return locale.get(key);
     }

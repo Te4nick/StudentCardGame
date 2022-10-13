@@ -75,6 +75,22 @@ public final class AssetManager {
                     c = getCard(c.getNextCardR());
                 }
             }
+            switch (PlayerStatus.getStatus()) {
+                case PlayerStatus.DEATH:
+                    c = getCard("zeroParam1");
+                    break;
+                case PlayerStatus.INSANITY:
+                    c = getCard("zeroParam2");
+                    break;
+                case PlayerStatus.DROPPEDOUT:
+                    c = getCard("zeroParam3");
+                    break;
+                case PlayerStatus.BROKE:
+                    c = getCard("zeroParam4");
+                    break;
+                default:
+                    break;
+            }
             drawTUI(c);
         }
     }

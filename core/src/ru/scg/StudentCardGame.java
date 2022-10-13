@@ -18,9 +18,10 @@ public class StudentCardGame extends ApplicationAdapter {
 		System.out.println(Localizator.getString("game"));
 		// Localizator.setLocaleDefault(Localizator.LOCALE_RU);
 		// System.out.println(Localizator.getString("game"));
-		HashMap<String, Card> deck = AssetManager.buildDeck();
-		String[] cKeys = AssetManager.getCardKeys();
-		System.out.println(deck.get(cKeys[2]).toString());
+		//HashMap<String, Card> deck = AssetManager.buildDeck();
+		//String[] cKeys = AssetManager.getCardKeys();
+		//System.out.println(deck.get(cKeys[2]).toString());
+		AssetManager.startTextGame();
 	}
 
 	@Override

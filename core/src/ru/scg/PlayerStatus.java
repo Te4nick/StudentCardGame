@@ -14,28 +14,23 @@ public final class PlayerStatus {
 
     private PlayerStatus () {}
 
-    private static int checkStatus() {
+    private static short getStatus() {
         if (health <= 0) return DEATH;
+        else if (mental <= 0) return INSANITY;
+        else if (study <= 0) return DROPPEDOUT;
+        else if (money <= 0) return BROKE;
         return 0;
     }
 
-    /**
-     *
-     * @param data - Formatted string "-1 5 10 -15"
-     */
-    public static void update(String data) {
-        String[] s = data.split(" ");
-        health += Integer.parseInt(s[0]);
-        mental += Integer.parseInt(s[1]);
-        study += Integer.parseInt(s[2]);
-        money += Integer.parseInt(s[3]);
-    }
-
-    public static void update(int[] data) {
+    public static void update(short[] data) {
         health += data[0];
         mental += data[1];
         study += data[2];
         money += data[3];
+    }
+
+    public static short[] getParams() {
+        return new short[]{health, mental, study, money};
     }
 
 }

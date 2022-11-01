@@ -2,10 +2,26 @@ package ru.scg;
 
 public final class PlayerStatus {
 
-    private static short health = 50; // Game params 0 <= n <= 100
-    private static short mental = 50;
-    private static short study = 50;
-    private static short money = 50;
+    public static short getHealth() {
+        return health;
+    }
+
+    public static short getMental() {
+        return mental;
+    }
+
+    public static short getStudy() {
+        return study;
+    }
+
+    public static short getMoney() {
+        return money;
+    }
+
+    private static short health = 75; // Game params 0 <= n <= 100
+    private static short mental = 35;
+    private static short study = 100;
+    private static short money = 13;
 
     public static final short DEATH = 1;
     public static final short INSANITY = 2;
@@ -32,5 +48,6 @@ public final class PlayerStatus {
     public static short[] getParams() {
         return new short[]{health, mental, study, money};
     }
+
 
 }

@@ -4,19 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class MainMenuScreen implements Screen {
     //Constants
-    public static final int BUTTON_WIDTH = 150;
-    public static final int BUTTON_HEIGHT = 75;
-    public static final int EXIT_BUTTON_Y = 100;
-    public static final int PLAY_BUTTON_Y = 300;
     StudentCardGame game;
     private Stage stage;
     private Skin skin;
@@ -34,10 +34,11 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
         System.out.println("Show Menu");
-        this.skin = new Skin();
-        skin.add("default-font", game.defaultFont);
+        Gdx.input.setInputProcessor(stage);
+        this.skin = new Skin(new TextureAtlas("UI/MainSkin.atlas"));
+        this.skin.load(Gdx.files.internal("UI/MainSkin.json"));
+        stage.clear();
 
         Runnable transitionRunnable = new Runnable() {
             @Override
@@ -45,8 +46,6 @@ public class MainMenuScreen implements Screen {
                 game.setScreen(game.mainMenuScreen);
             }
         };
-
-        initButtons();
 
         logo = new Texture("Logo.png");
         background = new Texture("MenuBackground.jpg");
@@ -57,17 +56,39 @@ public class MainMenuScreen implements Screen {
         logoImg = new Image(logo);
         stage.addActor(logoImg);
 
-        logoImg.setBounds(0, 100,350, 350);
-        logoImg.addAction(sequence(alpha(0), parallel(moveBy(20, 0, 1f), fadeIn(1f))));
+
+
+        logoImg.setBounds(0, 180,500, 450);
+        logoImg.addAction(sequence(alpha(0), parallel(moveBy(70, 0, .5f), fadeIn(1f)) /*run(transitionRunnable)*/));
         //logoImg.addAction(run(transitionRunnable));
+
+        initButtons();
     }
 
     private void initButtons() {
-//        playButton = new TextButton("Играть", new TextButton.TextButtonStyle());
-//        exitButton = new TextButton("Выход", skin);
-//        playButton.setPosition(500,350);
-//        playButton.setSize(100, 30);
-//        stage.addActor(playButton);
+        playButton = new TextButton("Play", skin, "default");
+        playButton.setPosition(750,400);
+        playButton.setSize(400, 150);
+        playButton.addAction(sequence(alpha(0), parallel(fadeIn(.5f), moveBy(0,-30, .5f, Interpolation.pow5Out))));
+        playButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                game.setScreen(game.gameScreen);
+            }
+        });
+        stage.addActor(playButton);
+
+        exitButton = new TextButton("Exit", skin, "default");
+        exitButton.setPosition(750, 150);
+        exitButton.setSize(400, 150);
+        exitButton.addAction(sequence(alpha(0), parallel(fadeIn(.5f), moveBy(0,-30, .5f, Interpolation.pow5Out))));
+        exitButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                Gdx.app.exit();
+            }
+        });
+        stage.addActor(exitButton);
     }
 
     @Override
@@ -79,9 +100,6 @@ public class MainMenuScreen implements Screen {
 
         game.batch.begin();
 
-//        game.batch.draw(background, 0, 0, 640, 480);
-//        game.batch.draw(logo, 20, 100, 350, 350);
-        //game.gameMenuFont.draw(game.batch, "Sample Text", 300, 300);
 
         game.batch.end();
 
@@ -112,6 +130,7 @@ public class MainMenuScreen implements Screen {
         background.dispose();
         logo.dispose();
         game.dispose();
-
+        stage.dispose();
+        skin.dispose();
     }
 }

@@ -1,0 +1,606 @@
+{
+"com.badlogic.gdx.graphics.g2d.BitmapFont": {
+	"F12": {
+		"file": "PressStart2P(3).fnt"
+	},
+	"F16": {
+		"file": "PressStart2P(2).fnt"
+	},
+	"font": {
+		"file": "font-export.fnt"
+	},
+	"font-over": {
+		"file": "font-over-export.fnt"
+	},
+	"font-pressed": {
+		"file": "font-pressed-export.fnt"
+	},
+	"PressStart2P1": {
+		"file": "PressStart2P(1).fnt"
+	}
+},
+"com.badlogic.gdx.graphics.Color": {
+	"BLU": {
+		"r": 0.2752809,
+		"g": 0.60674155,
+		"b": 1,
+		"a": 1
+	},
+	"color": {
+		"r": 0.14117648,
+		"g": 1,
+		"b": 0.09019608,
+		"a": 1
+	},
+	"selected": {
+		"r": 0.07058824,
+		"g": 0.49019608,
+		"b": 0.039215688,
+		"a": 1
+	},
+	"SKY_BLUE": {
+		"r": 0.39607844,
+		"g": 0.8627451,
+		"b": 1,
+		"a": 1
+	},
+	"Teal": {
+		"r": 0.7019608,
+		"g": 0.99607843,
+		"b": 1,
+		"a": 1
+	},
+	"text": {
+		"r": 0.47058824,
+		"g": 1,
+		"b": 0.4509804,
+		"a": 1
+	},
+	"text-selected": {
+		"r": 0.76862746,
+		"g": 1,
+		"b": 0.7490196,
+		"a": 1
+	},
+	"WHITE": {
+		"r": 1,
+		"g": 0.99215686,
+		"b": 0.99215686,
+		"a": 1
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable": {
+	"button-c": {
+		"name": "button",
+		"color": "color"
+	},
+	"button-over-c": {
+		"name": "button-over",
+		"color": "color"
+	},
+	"button-pressed-c": {
+		"name": "button-pressed",
+		"color": "color"
+	},
+	"checkbox-pressed-c": {
+		"name": "checkbox-pressed",
+		"color": "color"
+	},
+	"checkbox-c": {
+		"name": "checkbox",
+		"color": "color"
+	},
+	"checkbox-over-c": {
+		"name": "checkbox-over",
+		"color": "color"
+	},
+	"radio-c": {
+		"name": "radio",
+		"color": "color"
+	},
+	"radio-pressed-c": {
+		"name": "radio-pressed",
+		"color": "color"
+	},
+	"radio-over-c": {
+		"name": "radio-over",
+		"color": "color"
+	},
+	"color": {
+		"name": "white",
+		"color": "color"
+	},
+	"list-c": {
+		"name": "list",
+		"color": "color"
+	},
+	"slider-c": {
+		"name": "slider",
+		"color": "color"
+	},
+	"progress-bar-c": {
+		"name": "progress-bar",
+		"color": "color"
+	},
+	"progress-bar-knob-c": {
+		"name": "progress-bar-knob",
+		"color": "color"
+	},
+	"progress-bar-vertical-c": {
+		"name": "progress-bar-vertical",
+		"color": "color"
+	},
+	"progress-bar-vertical-knob-c": {
+		"name": "progress-bar-vertical-knob",
+		"color": "color"
+	},
+	"scroll-horizontal-c": {
+		"name": "scroll-horizontal",
+		"color": "color"
+	},
+	"scroll-vertical-c": {
+		"name": "scroll-vertical",
+		"color": "color"
+	},
+	"scroll-vertical-teal": {
+		"name": "scroll-vertical",
+		"color": "Teal"
+	},
+	"select-box-c": {
+		"name": "select-box",
+		"color": "color"
+	},
+	"select-box-over-c": {
+		"name": "select-box-over",
+		"color": "color"
+	},
+	"select-box-pressed-c": {
+		"name": "select-box-pressed",
+		"color": "color"
+	},
+	"slider-before-c": {
+		"name": "slider-before",
+		"color": "color"
+	},
+	"slider-knob-c": {
+		"name": "slider-knob",
+		"color": "color"
+	},
+	"slider-knob-pressed-c": {
+		"name": "slider-knob-pressed",
+		"color": "color"
+	},
+	"slider-vertical-c": {
+		"name": "slider-vertical",
+		"color": "color"
+	},
+	"slider-vertical-before-c": {
+		"name": "slider-vertical-before",
+		"color": "color"
+	},
+	"split-pane-horizontal-c": {
+		"name": "split-pane-horizontal",
+		"color": "color"
+	},
+	"split-pane-vertical-c": {
+		"name": "split-pane-vertical",
+		"color": "color"
+	},
+	"selected": {
+		"name": "white",
+		"color": "selected"
+	},
+	"textfield-c": {
+		"name": "textfield",
+		"color": "color"
+	},
+	"textfield-login-c": {
+		"name": "textfield-login",
+		"color": "color"
+	},
+	"textfield-selected-c": {
+		"name": "textfield-selected",
+		"color": "color"
+	},
+	"textfield-login-selected-c": {
+		"name": "textfield-login-selected",
+		"color": "color"
+	},
+	"textfield-password-c": {
+		"name": "textfield-password",
+		"color": "color"
+	},
+	"textfield-password-selected-c": {
+		"name": "textfield-password-selected",
+		"color": "color"
+	},
+	"tooltip-c": {
+		"name": "tooltip",
+		"color": "color"
+	},
+	"touchpad-c": {
+		"name": "touchpad",
+		"color": "color"
+	},
+	"touchpad-knob-c": {
+		"name": "touchpad-knob",
+		"color": "color"
+	},
+	"plus-c": {
+		"name": "plus",
+		"color": "color"
+	},
+	"minus-c": {
+		"name": "minus",
+		"color": "color"
+	},
+	"window-c": {
+		"name": "window",
+		"color": "color"
+	},
+	"checkbox-pressed-over-c": {
+		"name": "checkbox-pressed-over",
+		"color": "color"
+	},
+	"progress-bar-big-c": {
+		"name": "progress-bar-big",
+		"color": "color"
+	},
+	"progress-bar-big-knob-c": {
+		"name": "progress-bar-big-knob",
+		"color": "color"
+	},
+	"buttonBLU": {
+		"name": "button",
+		"color": "SKY_BLUE"
+	},
+	"progressBACK": {
+		"name": "button",
+		"color": "BLU",
+		"minWidth": 100
+	},
+	"progressFRONT": {
+		"name": "button-over",
+		"color": "Teal",
+		"minWidth": 100
+	},
+	"button-overBLU": {
+		"name": "button-over",
+		"color": {
+			"r": 0.16078432,
+			"g": 0.44662923,
+			"b": 1,
+			"a": 1
+		}
+	},
+	"btnBLU": {
+		"name": "button",
+		"color": {
+			"r": 0.22191028,
+			"g": 0.53089887,
+			"b": 1,
+			"a": 1
+		}
+	},
+	"checkboxBLU": {
+		"name": "checkbox",
+		"color": "BLU"
+	},
+	"checkbox-overBLU": {
+		"name": "checkbox-over",
+		"color": "BLU"
+	},
+	"checkbox-pressed-overBLU": {
+		"name": "checkbox-pressed-over",
+		"color": "BLU"
+	},
+	"button-pressedBLU": {
+		"name": "button-pressed",
+		"color": "BLU"
+	},
+	"listBLU": {
+		"name": "list",
+		"color": "BLU"
+	},
+	"progress-bar-knobBLU": {
+		"name": "progress-bar-knob",
+		"color": "BLU"
+	},
+	"scroll-horizontalBLU": {
+		"name": "scroll-horizontal",
+		"color": "BLU"
+	},
+	"scroll-verticalBLU": {
+		"name": "scroll-vertical",
+		"color": "BLU"
+	},
+	"select-boxBLU": {
+		"name": "select-box",
+		"color": "BLU"
+	},
+	"select-box-overBLU": {
+		"name": "select-box-over",
+		"color": "BLU"
+	},
+	"select-box-pressedBLU": {
+		"name": "select-box-pressed",
+		"color": "BLU"
+	},
+	"slider-knob-pressedBLU": {
+		"name": "slider-knob-pressed",
+		"color": "SKY_BLUE"
+	},
+	"slider-knob-pressedTEAL": {
+		"name": "slider-knob-pressed",
+		"color": "Teal"
+	},
+	"sliderBLU": {
+		"name": "slider",
+		"color": "SKY_BLUE"
+	},
+	"slider-beforeTEAL": {
+		"name": "slider-before",
+		"color": "Teal"
+	},
+	"textfieldBLU": {
+		"name": "textfield",
+		"color": "BLU"
+	},
+	"textfield-selectedBLU": {
+		"name": "textfield-selected",
+		"color": "BLU"
+	},
+	"textfield-selectedSKYBLUa": {
+		"name": "textfield-selected",
+		"color": "SKY_BLUE"
+	},
+	"tooltipBLU": {
+		"name": "tooltip",
+		"color": "BLU"
+	},
+	"tooltipSKYBLU": {
+		"name": "tooltip",
+		"color": "SKY_BLUE"
+	},
+	"touchpadBLU": {
+		"name": "touchpad",
+		"color": "BLU"
+	},
+	"touchpad-knobBLU": {
+		"name": "touchpad-knob",
+		"color": "BLU"
+	},
+	"windowBLU": {
+		"name": "window",
+		"color": "BLU"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
+	"default": {
+		"up": "btnBLU",
+		"down": "button-overBLU",
+		"over": "button-overBLU"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
+	"default": {
+		"checkboxOn": "checkbox-pressed-overBLU",
+		"checkboxOff": "checkboxBLU",
+		"checkboxOver": "checkbox-overBLU",
+		"font": "F12",
+		"fontColor": "BLU",
+		"downFontColor": "BLU",
+		"overFontColor": "BLU",
+		"checkedFontColor": "text-selected",
+		"checkedOverFontColor": "BLU",
+		"disabledFontColor": "BLU",
+		"pressedOffsetY": 5
+	},
+	"radio": {
+		"checkboxOn": "radio-pressed-c",
+		"checkboxOff": "radio-c",
+		"checkboxOver": "radio-over-c",
+		"font": "font",
+		"fontColor": "color",
+		"downFontColor": "selected",
+		"checkedFontColor": "selected"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
+	"default": {
+		"imageUp": "btnBLU",
+		"imageDown": "button-pressedBLU",
+		"imageOver": "button-overBLU"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle": {
+	"default": {
+		"font": "F16",
+		"fontColor": "WHITE",
+		"downFontColor": "WHITE",
+		"overFontColor": "WHITE",
+		"checkedFontColor": "WHITE",
+		"checkedOverFontColor": "WHITE",
+		"disabledFontColor": "WHITE",
+		"up": "button-c",
+		"down": "button-pressed-c",
+		"over": "button-over-c"
+	},
+	"checkbox": {
+		"imageUp": "checkbox-c",
+		"imageDown": "checkbox-pressed-c",
+		"imageOver": "checkbox-over-c",
+		"imageChecked": "checkbox-pressed-c",
+		"imageCheckedOver": "checkbox-pressed-over-c",
+		"font": "font",
+		"fontColor": "text",
+		"downFontColor": "text-selected",
+		"checkedFontColor": "text-selected"
+	},
+	"radio": {
+		"imageUp": "radio-c",
+		"imageDown": "radio-pressed-c",
+		"imageOver": "radio-over-c",
+		"imageChecked": "radio-pressed-c",
+		"imageCheckedOver": "radio-over-c",
+		"font": "font",
+		"fontColor": "text",
+		"downFontColor": "text-selected",
+		"checkedFontColor": "text-selected"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+	"default": {
+		"font": "F12",
+		"fontColor": "Teal",
+		"background": "tooltipBLU"
+	},
+	"cardText":{
+		"font": "PressStart2P1",
+		"fontColor": "WHITE",
+		"background": "tooltipSKYBLU"
+	},
+	"sideInfo": {
+		"font": "F16",
+		"fontColor": "Teal"
+	},
+	"over": {
+		"font": "font-over",
+		"fontColor": "text"
+	},
+	"pressed": {
+		"font": "font-pressed",
+		"fontColor": "text"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
+	"default": {
+		"font": "F12",
+		"fontColorSelected": "BLU",
+		"fontColorUnselected": "Teal",
+		"selection": "button-overBLU",
+		"background": "listBLU"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle": {
+	"default-horizontal": {
+		"background": "progress-bar-c",
+		"knobBefore": "progress-bar-knobBLU"
+	},
+	"default-vertical": {
+		"background": "progressBACK",
+		"knobBefore": "progressFRONT"
+	},
+	"big": {
+		"background": "progress-bar-big-c",
+		"knobBefore": "progress-bar-big-knob-c"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
+	"default": {
+		"hScrollKnob": "scroll-horizontalBLU",
+		"vScrollKnob": "scroll-verticalBLU"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle": {
+	"default": {
+		"font": "F12",
+		"fontColor": "SKY_BLUE",
+		"disabledFontColor": "WHITE",
+		"background": "select-boxBLU",
+		"scrollStyle": "default",
+		"listStyle": "default",
+		"backgroundOver": "select-box-overBLU",
+		"backgroundOpen": "select-box-pressedBLU"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle": {
+	"default-horizontal": {
+		"knobOver": "slider-knob-pressedTEAL",
+		"knobDown": "slider-knob-pressedBLU",
+		"background": "sliderBLU",
+		"knob": "slider-knob-pressedTEAL",
+		"knobBefore": "slider-beforeTEAL"
+	},
+	"default-vertical": {
+		"knobOver": "slider-knob-pressed-c",
+		"knobDown": "slider-knob-pressed-c",
+		"background": "slider-vertical-c",
+		"knob": "slider-knob-c",
+		"knobBefore": "slider-vertical-before-c"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle": {
+	"default-horizontal": {
+		"handle": "split-pane-horizontal-c"
+	},
+	"default-vertical": {
+		"handle": "split-pane-vertical-c"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+	"default": {
+		"font": "PressStart2P1",
+		"fontColor": "SKY_BLUE",
+		"downFontColor": "SKY_BLUE",
+		"overFontColor": "Teal",
+		"up": "btnBLU",
+		"down": "button-pressedBLU",
+		"over": "button-overBLU"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
+	"default": {
+		"font": "F12",
+		"fontColor": "BLU",
+		"focusedFontColor": "SKY_BLUE",
+		"background": "textfieldBLU",
+		"focusedBackground": "textfield-selectedSKYBLUa",
+		"cursor": "color",
+		"selection": "selected"
+	},
+	"login": {
+		"font": "font",
+		"fontColor": "text",
+		"background": "textfield-login-c",
+		"focusedBackground": "textfield-login-selected-c",
+		"cursor": "color",
+		"selection": "selected"
+	},
+	"password": {
+		"font": "font",
+		"fontColor": "text",
+		"background": "textfield-password-c",
+		"focusedBackground": "textfield-password-selected-c",
+		"cursor": "color",
+		"selection": "selected"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle": {
+	"default": {
+		"label": "default",
+		"background": "tooltipBLU",
+		"wrapWidth": 1
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle": {
+	"default": {
+		"background": "touchpadBLU",
+		"knob": "touchpad-knobBLU"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle": {
+	"default": {
+		"plus": "plus-c",
+		"minus": "minus-c",
+		"selection": "selected"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
+	"default": {
+		"background": "windowBLU",
+		"titleFont": "F12",
+		"titleFontColor": "SKY_BLUE"
+	}
+}
+}

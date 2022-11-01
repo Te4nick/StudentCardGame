@@ -23,7 +23,12 @@ public class Card {
         this.nextCardL = nextCardL;
         this.nextCardR = nextCardR;
     }
-
+    public String getSpritePath() {
+        return spritePath;
+    }
+    public String getCharacter() {
+        return character;
+    }
     public String getLineM() {
         return lineM;
     }

@@ -1,6 +1,5 @@
 package ru.scg;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
@@ -82,7 +81,7 @@ public final class AssetManager {
                 case PlayerStatus.INSANITY:
                     c = getCard("zeroParam2");
                     break;
-                case PlayerStatus.DROPPEDOUT:
+                case PlayerStatus.DROPPED:
                     c = getCard("zeroParam3");
                     break;
                 case PlayerStatus.BROKE:
@@ -96,7 +95,7 @@ public final class AssetManager {
     }
 
     private static void drawTUI(Card c) {
-        short[] p = PlayerStatus.getParams();
+        short[] p = PlayerStatus.getStats();
         System.out.printf("Health: %d, Mental: %d, Study: %d, Money: %d\n", p[0], p[1], p[2], p[3]);
         System.out.println(c.toString() + "\nChoose left/right option (Enter \"l\" or \"r\"):");
     }

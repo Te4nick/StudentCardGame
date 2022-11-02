@@ -12,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
-import java.awt.event.MouseListener;
-
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 import static ru.scg.StudentCardGame.batch;
 
@@ -22,7 +20,6 @@ public class GameScreen implements Screen {
     private Stage stage;
     private int movedStatus;
     private Skin skin;
-    private Skin skinPB;
     private Label mainScene;
     private Label cardText;
     private Label lifeDuration;
@@ -34,47 +31,25 @@ public class GameScreen implements Screen {
     private Label health;
     private Label money;
     private Texture mask;
-    private Texture cardTextue;
+    private Texture cardTexture;
     private Image cardImage;
     private Image maskImg;
     private Button left;
     private Button right;
     private Card card;
+
     public GameScreen(StudentCardGame game){
         this.game = game;
         this.stage = new Stage();
     }
-    @Override
-    public void show() {
-        System.out.println("Show Game");
-        movedStatus = 0;
-        Gdx.input.setInputProcessor(stage);
-        this.skin = new Skin(new TextureAtlas("UI/MainSkin.atlas"));
-        this.skin.load(Gdx.files.internal("UI/MainSkin.json"));
-        stage.clear();
 
-        AssetManager.getCardKeys();
-        card = AssetManager.getCard("bf");
-
-        initLabels();
-        initCard();
-        initSpecs();
-        initButtons();
-
-        mask = new Texture(Gdx.files.internal("Mask.png"));
-        maskImg = new Image(mask);
-        maskImg.setPosition(420, 600);
-        maskImg.setSize(440, 100);
-        stage.addActor(maskImg);
-    }
-
-    private void initButtons() {
+    private void initButtons() { // TODO: extract inserting cards to new public method
         left = new Button(skin, "invisible");
         left.setBounds(640, 200, 220, 390);
         left.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                System.out.println("Left Choice");
+                // System.out.println("Left Choice");
                 cardImage.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 leftAnswer.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 PlayerStatus.update(card.getStatsL());
@@ -91,7 +66,7 @@ public class GameScreen implements Screen {
         right.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                System.out.println("Right Choice");
+                // System.out.println("Right Choice");
                 cardImage.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 rightAnswer.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 PlayerStatus.update(card.getStatsR());
@@ -105,8 +80,8 @@ public class GameScreen implements Screen {
     }
 
     private void updCard() {
-        cardTextue =new Texture(Gdx.files.internal(card.getSpritePath()));
-        cardImage = new Image(cardTextue);
+        cardTexture =new Texture(Gdx.files.internal(card.getSpritePath()));
+        cardImage = new Image(cardTexture);
         cardImage.addAction(alpha(0));
         movedStatus = 0;
         cardImage.addAction(sequence(delay(.5f), alpha(1, .5f, Interpolation.pow2)));
@@ -132,8 +107,8 @@ public class GameScreen implements Screen {
         stage.addActor(rightAnswer);
     }
     private void initCard() {
-        cardTextue =new Texture(Gdx.files.internal(card.getSpritePath()));
-        cardImage = new Image(cardTextue);
+        cardTexture =new Texture(Gdx.files.internal(card.getSpritePath()));
+        cardImage = new Image(cardTexture);
         cardImage.setSize(440, 390);
         cardImage.setPosition(420, 200);
         stage.addActor(cardImage);
@@ -203,6 +178,40 @@ public class GameScreen implements Screen {
         stage.addActor(additionalInfo);
     }
 
+    private void updateLabels(float delta) {
+        cardText.setText(card.getLineM());
+        additionalInfo.setText(card.getCharacter());
+        short[] stats = PlayerStatus.getStats();
+        mental.setSize(90, 15+(int)(75*(stats[0] / 100.0)));
+        study.setSize(130, 15+(int)(80*(stats[1] / 100.0)));
+        health.setSize(100, 15+(int)(80*(stats[2] / 100.0)));
+        money.setSize(100, 15+(int)(80*(stats[3] / 100.0)));
+    }
+
+    @Override
+    public void show() {
+        // System.out.println("Show Game");
+        movedStatus = 0;
+        Gdx.input.setInputProcessor(stage);
+        this.skin = new Skin(new TextureAtlas("UI/MainSkin.atlas"));
+        this.skin.load(Gdx.files.internal("UI/MainSkin.json"));
+        stage.clear();
+
+        AssetManager.getCardKeys();
+        card = AssetManager.getCard("bf");
+
+        initLabels();
+        initCard();
+        initSpecs();
+        initButtons();
+
+        mask = new Texture(Gdx.files.internal("Mask.png"));
+        maskImg = new Image(mask);
+        maskImg.setPosition(420, 600);
+        maskImg.setSize(440, 100);
+        stage.addActor(maskImg);
+    }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, .1f, 1);
@@ -211,7 +220,7 @@ public class GameScreen implements Screen {
         stage.draw();
 
         batch.begin();
-        // TODO: add Stacks w labels and card image
+        // TODO: add Stacks w/ labels and card image
         if (Gdx.input.getX() > 400 && Gdx.input.getX() < 600 && movedStatus != 2 && Gdx.input.getY() > 120 && Gdx.input.getY() < 520)
         {
             cardImage.addAction(parallel(moveBy(-70, 0, .5f, Interpolation.pow2), rotateBy(5f, .5f))/*run(transitionRunnable)*/);
@@ -236,15 +245,6 @@ public class GameScreen implements Screen {
 
         batch.end();
         updateLabels(delta);
-    }
-
-    private void updateLabels(float delta) {
-        cardText.setText(card.getLineM());
-        additionalInfo.setText(card.getCharacter());
-        mental.setSize(90, 15+(int)(75*(PlayerStatus.getMental() / 100.0)));
-        study.setSize(130, 15+(int)(80*(PlayerStatus.getStudy() / 100.0)));
-        health.setSize(100, 15+(int)(80*(PlayerStatus.getHealth() / 100.0)));
-        money.setSize(100, 15+(int)(80*(PlayerStatus.getMoney() / 100.0)));
     }
 
     @Override

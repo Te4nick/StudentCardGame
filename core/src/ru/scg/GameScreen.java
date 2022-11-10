@@ -4,15 +4,15 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
-
-import java.awt.event.MouseListener;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 import static ru.scg.StudentCardGame.batch;
@@ -22,7 +22,6 @@ public class GameScreen implements Screen {
     private Stage stage;
     private int movedStatus;
     private Skin skin;
-    private Skin skinPB;
     private Label mainScene;
     private Label cardText;
     private Label lifeDuration;
@@ -35,44 +34,17 @@ public class GameScreen implements Screen {
     private Label money;
     private Texture change;
     private Texture mask;
-    private Texture cardTextue;
+    private Texture cardTexture;
     private Image cardImage;
     private Image mentalChangeI, studyChangeI, healthChangeI, moneyChangeI;
     private Image maskImg;
     private Button left;
     private Button right;
     private Card card;
+
     public GameScreen(StudentCardGame game){
         this.game = game;
         this.stage = new Stage();
-    }
-    @Override
-    public void show() {
-        System.out.println("Show Game");
-        movedStatus = 0;
-        Gdx.input.setInputProcessor(stage);
-        this.skin = new Skin(new TextureAtlas("UI/MainSkin.atlas"));
-        this.skin.load(Gdx.files.internal("UI/MainSkin.json"));
-        stage.clear();
-
-        AssetManager.getCardKeys();
-        card = AssetManager.getCard("bf");
-
-        resetStats();
-        initLabels();
-        initCard();
-        initSpecs();
-        initButtons();
-    }
-
-    private void resetStats() {
-        PlayerStatus.setDuration(0);
-        short[] newStats = new short[4];
-        for(int i  = 0; i < 4; i++)
-        {
-            newStats[i] = (short)((Math.random()*60) + 10);
-        }
-        PlayerStatus.set(newStats);
     }
 
     private void initButtons() {
@@ -85,13 +57,8 @@ public class GameScreen implements Screen {
                 cardImage.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 leftAnswer.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 PlayerStatus.update(card.getStatsL());
-                if(AssetManager.isEnd())
-                {
-                    game.setScreen(game.gameOverScreen);
-                }
-                String nc = card.getNextCardL();
-                card = AssetManager.getCard(nc);
-                updCard();
+                if(card.getNextCardL().equals("end")) game.setScreen(game.gameOverScreen); // End Game Check
+                updCard(true);
                 initButtons();
             }
         });
@@ -106,30 +73,35 @@ public class GameScreen implements Screen {
                 cardImage.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 rightAnswer.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 PlayerStatus.update(card.getStatsR());
-                if(AssetManager.isEnd())
-                {
-                    game.setScreen(game.gameOverScreen);
-                }
-                String nc = card.getNextCardR();
-                card = AssetManager.getCard(nc);
-                updCard();
+                if(card.getNextCardR().equals("end")) game.setScreen(game.gameOverScreen); // End Game Check
+                updCard(false);
                 initButtons();
             }
         });
         stage.addActor(right);
     }
 
-    private void updCard() {
-        cardTextue =new Texture(Gdx.files.internal(card.getSpritePath()));
-        PlayerStatus.setDuration(PlayerStatus.getDuration()+1);
-        lifeDuration.setText("Day#"+ PlayerStatus.getDuration());
-        cardImage = new Image(cardTextue);
+    private void updCard(boolean leftOption) {
+        card = AssetManager.getNextCard(leftOption);
+        cardTexture = new Texture(Gdx.files.internal(card.getSpritePath()));
+        PlayerStatus.incrementDuration();
+        cardImage.setDrawable(new SpriteDrawable(new Sprite(cardTexture)));
+        if (movedStatus == 2) {
+            cardImage.addAction(parallel(moveBy(140, 0, .5f), rotateBy(-5f, .5f))/*run(transitionRunnable)*/);
+            rightAnswer.addAction(parallel(moveBy(90, -80, .5f, Interpolation.pow2), alpha(0, .5f)));
+            movedStatus = 0;
+        } else if (movedStatus == 1) {
+            cardImage.addAction(parallel(moveBy(-140, 0, .5f), rotateBy(5f, .5f))/*run(transitionRunnable)*/);
+            leftAnswer.addAction(parallel(moveBy(-90, 60, .5f, Interpolation.pow2), alpha(0, .5f)));
+            movedStatus = 0;
+        }
         cardImage.addAction(alpha(0));
-        movedStatus = 0;
         cardImage.addAction(sequence(delay(.5f), alpha(1, .5f, Interpolation.pow2)));
         cardImage.setSize(440, 390);
         cardImage.setPosition(420, 200);
         stage.addActor(cardImage);
+
+        lifeDuration.setText("Day#"+ PlayerStatus.getDuration());
 
         leftAnswer = new Label(card.getLineL(), skin, "LRInfo");
         leftAnswer.addAction(alpha(0));
@@ -148,9 +120,10 @@ public class GameScreen implements Screen {
         rightAnswer.addAction(alpha(0));
         stage.addActor(rightAnswer);
     }
+
     private void initCard() {
-        cardTextue =new Texture(Gdx.files.internal(card.getSpritePath()));
-        cardImage = new Image(cardTextue);
+        cardTexture =new Texture(Gdx.files.internal(card.getSpritePath()));
+        cardImage = new Image(cardTexture);
         cardImage.setSize(440, 390);
         cardImage.setPosition(420, 200);
         stage.addActor(cardImage);
@@ -251,6 +224,39 @@ public class GameScreen implements Screen {
         stage.addActor(additionalInfo);
     }
 
+    private void updateLabels() {
+        cardText.setText(card.getLineM());
+        additionalInfo.setText(card.getCharacter());
+        short[] stats = PlayerStatus.getStats();
+        if (stats[0] == 0) health.setVisible(false);
+        else health.setHeight(15+(int)(80*(stats[0] / 100.0)));
+        if (stats[1] == 0) mental.setVisible(false);
+        else mental.setHeight(15+(int)(75*(stats[1] / 100.0)));
+        if (stats[2] == 0) study.setVisible(false);
+        else study.setHeight(15+(int)(80*(stats[2] / 100.0)));
+        if (stats[3] == 0) money.setVisible(false);
+        else money.setHeight(15+(int)(80*(stats[3] / 100.0)));
+    }
+
+    @Override
+    public void show() {
+        System.out.println("Show Game");
+        movedStatus = 0;
+        Gdx.input.setInputProcessor(stage);
+        this.skin = new Skin(new TextureAtlas("UI/MainSkin.atlas"));
+        this.skin.load(Gdx.files.internal("UI/MainSkin.json"));
+        stage.clear();
+
+        AssetManager.getCardKeys();
+        card = AssetManager.getCard("bf");
+
+        PlayerStatus.resetStats();
+        initLabels();
+        initCard();
+        initSpecs();
+        initButtons();
+    }
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, .1f, 1);
@@ -260,52 +266,26 @@ public class GameScreen implements Screen {
 
         batch.begin();
         // TODO: add Stacks w labels and card image
-        if (Gdx.input.getX() > 400 && Gdx.input.getX() < 600 && movedStatus != 2 && Gdx.input.getY() > 120 && Gdx.input.getY() < 520)
-        {
+        if (Gdx.input.getX() > 400 && Gdx.input.getX() < 600 && movedStatus != 2 && Gdx.input.getY() > 120 && Gdx.input.getY() < 520) {
             cardImage.addAction(parallel(moveBy(-70, 0, .5f, Interpolation.pow2), rotateBy(5f, .5f))/*run(transitionRunnable)*/);
             rightAnswer.addAction(parallel(moveBy(-90, 80, .5f, Interpolation.pow2), alpha(1, .5f)));
-            short[] stats = card.getStatsR();
-            if(stats[0] != 0)
-            {
-                healthChangeI.addAction(alpha(1, .5f));
-            }
-            if(stats[1] != 0)
-            {
-                mentalChangeI.addAction(alpha(1, .5f));
-            }
-            if(stats[2] != 0)
-            {
-                studyChangeI.addAction(alpha(1, .5f));
-            }
-            if(stats[3] != 0)
-            {
-                moneyChangeI.addAction(alpha(1, .5f));
-            }
+            byte[] stats = card.getStatsR();
+            if(stats[0] != 0) healthChangeI.addAction(alpha(1, .5f));
+            if(stats[1] != 0) mentalChangeI.addAction(alpha(1, .5f));
+            if(stats[2] != 0) studyChangeI.addAction(alpha(1, .5f));
+            if(stats[3] != 0) moneyChangeI.addAction(alpha(1, .5f));
             movedStatus = 2;
         } else if (Gdx.input.getX() < 880 && Gdx.input.getX() > 680 && movedStatus != 1 && Gdx.input.getY() > 120 && Gdx.input.getY() < 520) {
             cardImage.addAction(parallel(moveBy(70, 0, .5f, Interpolation.pow2), rotateBy(-5f, .5f))/*run(transitionRunnable)*/);
             leftAnswer.addAction(parallel(moveBy(90, -60, .5f, Interpolation.pow2), alpha(1, .5f)));
-            short[] stats = card.getStatsL();
-            if(stats[0] != 0)
-            {
-                healthChangeI.addAction(alpha(1, .5f));
-            }
-            if(stats[1] != 0)
-            {
-                mentalChangeI.addAction(alpha(1, .5f));
-            }
-            if(stats[2] != 0)
-            {
-                studyChangeI.addAction(alpha(1, .5f));
-            }
-            if(stats[3] != 0)
-            {
-                moneyChangeI.addAction(alpha(1, .5f));
-            }
+            byte[] stats = card.getStatsL();
+            if(stats[0] != 0) healthChangeI.addAction(alpha(1, .5f));
+            if(stats[1] != 0) mentalChangeI.addAction(alpha(1, .5f));
+            if(stats[2] != 0) studyChangeI.addAction(alpha(1, .5f));
+            if(stats[3] != 0) moneyChangeI.addAction(alpha(1, .5f));
             movedStatus = 1;
         } else if ((Gdx.input.getX() < 400 || Gdx.input.getX() > 880)||(Gdx.input.getX() > 600 && Gdx.input.getX() < 680)) {// FIXME: collision bug
-            if (movedStatus == 2)
-            {
+            if (movedStatus == 2) {
                 healthChangeI.addAction(alpha(0, .5f));
                 mentalChangeI.addAction(alpha(0, .5f));
                 studyChangeI.addAction(alpha(0, .5f));
@@ -325,16 +305,7 @@ public class GameScreen implements Screen {
         }
 
         batch.end();
-        updateLabels(delta);
-    }
-
-    private void updateLabels(float delta) {
-        cardText.setText(card.getLineM());
-        additionalInfo.setText(card.getCharacter());
-        mental.setSize(90, 15+(int)(75*(PlayerStatus.getMental() / 100.0)));
-        study.setSize(130, 15+(int)(80*(PlayerStatus.getStudy() / 100.0)));
-        health.setSize(100, 15+(int)(80*(PlayerStatus.getHealth() / 100.0)));
-        money.setSize(100, 15+(int)(80*(PlayerStatus.getMoney() / 100.0)));
+        updateLabels();
     }
 
     @Override

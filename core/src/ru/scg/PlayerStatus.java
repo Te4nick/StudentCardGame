@@ -2,66 +2,64 @@ package ru.scg;
 
 public final class PlayerStatus {
 
-    public static short getHealth() {
-        return health;
+    private static byte health = 0; // Game params 1 <= n <= 100
+    private static byte mental = 0;
+    private static byte study = 0;
+    private static byte money = 0;
+    private static short duration = 0;
+    public static final short ZEROPARAM1 = 1;
+    public static final short ZEROPARAM2 = 2;
+    public static final short ZEROPARAM3 = 3;
+    public static final short ZEROPARAM4 = 4;
+
+    private PlayerStatus () {}
+
+    public static void resetStats() {
+        health = 50;
+        mental = 50;
+        study = 50;
+        money = 50;
+        duration = 0;
     }
 
-    public static short getMental() {
-        return mental;
+    public static short getStatus() {
+        if (health == 0) return ZEROPARAM1;
+        else if (mental == 0) return ZEROPARAM2;
+        else if (study == 0) return ZEROPARAM3;
+        else if (money == 0) return ZEROPARAM4;
+        return 0;
     }
 
-    public static short getStudy() {
-        return study;
-    }
-
-    public static short getMoney() {
-        return money;
+    public static short update(byte[] data) {
+        health += data[0];
+        if (health > 100) health = 100;
+        if (health < 0) health = 0;
+        mental += data[1];
+        if (mental > 100) mental = 100;
+        if (mental < 0) mental = 0;
+        study += data[2];
+        if (study > 100) study = 100;
+        if (study < 0) study = 0;
+        money += data[3];
+        if (money > 100) money = 100;
+        if (money < 0) money = 0;
+        return getStatus();
     }
 
     public static int getDuration() {
         return duration;
     }
 
-    public static void setDuration(int duration) {
+    public static void incrementDuration() {
+        duration++;
+    }
+
+    public static void setDuration(short duration) {
         PlayerStatus.duration = duration;
     }
-    private static short health = 0; // Game params 0 <= n <= 100
-    private static short mental = 0;
-    private static short study = 0;
-    private static short money = 0;
 
-    private static int duration = 0;
-    public static final short DEATH = 1;
-    public static final short INSANITY = 2;
-    public static final short DROPPEDOUT = 3;
-    public static final short BROKE = 4;
-
-    private PlayerStatus () {}
-
-    public static short getStatus() {
-        if (health <= 0) return DEATH;
-        else if (mental <= 0) return INSANITY;
-        else if (study <= 0) return DROPPEDOUT;
-        else if (money <= 0) return BROKE;
-        return 0;
-    }
-
-    public static void update(short[] data) {
-        health += data[0];
-        mental += data[1];
-        study += data[2];
-        money += data[3];
-    }
-    public static void set(short[] data) {
-        health = data[0];
-        mental = data[1];
-        study = data[2];
-        money = data[3];
-    }
-
-    public static short[] getParams() {
+    public static short[] getStats() {
         return new short[]{health, mental, study, money};
     }
-
 
 }

@@ -7,12 +7,12 @@ public class Card {
     private final String lineM;
     private final String lineL;
     private final String lineR;
-    private final short[] statsL;
-    private final short[] statsR;
+    private final byte[] statsL;
+    private final byte[] statsR;
     private final String nextCardL;
     private final String nextCardR;
 
-    Card(String spritePath, String character, String lineM, String lineL, String lineR, short[] statsL, short[] statsR, String nextCardL, String nextCardR) {
+    Card(String spritePath, String character, String lineM, String lineL, String lineR, byte[] statsL, byte[] statsR, String nextCardL, String nextCardR) {
         this.spritePath = spritePath;
         this.character = character;
         this.lineM = lineM;
@@ -41,10 +41,10 @@ public class Card {
         return lineR;
     }
 
-    public short[] getStatsL() {
+    public byte[] getStatsL() {
         return statsL;
     }
-    public short[] getStatsR() {
+    public byte[] getStatsR() {
         return statsR;
     }
 

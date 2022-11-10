@@ -40,6 +40,7 @@ public class StudentCardGame extends Game {
 	@Override
 	public void render () {
 		super.render();
+		//gameScreen.render(1.0f);
 	}
 
 	@Override
@@ -47,6 +48,7 @@ public class StudentCardGame extends Game {
 		batch.dispose();
 		defaultFont.dispose();
 		gameScreen.dispose();
+		gameOverScreen.dispose();
 		mainMenuScreen.dispose();
 	}
 

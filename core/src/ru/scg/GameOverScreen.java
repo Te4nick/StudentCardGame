@@ -17,15 +17,58 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 public class GameOverScreen implements Screen{
     StudentCardGame game;
-    private Stage gameOverStage;
+    private final Stage gameOverStage;
     private Skin skin;
-    private Label mainSceneLabel;
-    private Label gameOvr;
-    private Label lifeDurationLabel;
-    private TextButton returnToMenu;
+
     public  GameOverScreen(StudentCardGame game){
         this.game = game;
         this.gameOverStage = new Stage();
+    }
+
+    private void initButtons() {
+        TextButton restart = new TextButton(Localizator.getString("restart"), skin, "default");
+        restart.setPosition(440, 250);
+        restart.setSize(400, 150);
+        restart.addAction(sequence(alpha(0), delay(4f), fadeIn(2.5f, Interpolation.pow2)));
+        restart.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(game.gameScreen);
+            }
+        });
+        gameOverStage.addActor(restart);
+
+        TextButton returnToMenu = new TextButton(Localizator.getString("backToMenu"), skin, "default");
+        returnToMenu.setPosition(440, 90);
+        returnToMenu.setSize(400, 150);
+        returnToMenu.addAction(sequence(alpha(0), delay(4f), fadeIn(2.5f, Interpolation.pow2)));
+        returnToMenu.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(game.mainMenuScreen);
+            }
+        });
+        gameOverStage.addActor(returnToMenu);
+    }
+
+    private void initLabels() {
+        Label gameOver = new Label(Localizator.getString("gameOver"), skin, "bigInfo");
+        gameOver.setPosition(400, 600);
+        gameOver.setSize(800, 180);
+        gameOver.setWrap(true);
+        gameOver.addAction(sequence(alpha(0), scaleTo(.1f, .1f),
+                parallel(fadeIn(2f, Interpolation.pow2),
+                        scaleTo(2f, 2f, 2.5f, Interpolation.pow5),
+                        moveTo(400, 400, 2f, Interpolation.swing))));
+
+        gameOverStage.addActor(gameOver);
+
+        Label lifeDurationLabel = new Label(String.format(
+                Localizator.getString("lifeDurationLabel"), PlayerStatus.getDuration()), skin,
+                "sideInfo");
+        lifeDurationLabel.setPosition(475, 420);
+        lifeDurationLabel.addAction(sequence(alpha(0), delay(2f), fadeIn(4f, Interpolation.pow2)));
+        gameOverStage.addActor(lifeDurationLabel);
     }
 
     @Override
@@ -39,39 +82,6 @@ public class GameOverScreen implements Screen{
         initButtons();
     }
 
-    private void initButtons() {
-        returnToMenu = new TextButton("Back to menu", skin, "bigBtn");
-        returnToMenu.setPosition(300, 100);
-        returnToMenu.setSize(680, 220);
-        returnToMenu.addAction(sequence(alpha(0), delay(4f), fadeIn(2.5f, Interpolation.pow2)));
-        returnToMenu.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(game.mainMenuScreen);
-            }
-        });
-        gameOverStage.addActor(returnToMenu);
-    }
-
-    private void initLabels() {
-
-        gameOvr = new Label("Game Over!", skin, "bigInfo");
-        gameOvr.setPosition(400, 600);
-        gameOvr.setSize(800, 180);
-        gameOvr.setWrap(true);
-        gameOvr.addAction(sequence(alpha(0), scaleTo(.1f, .1f),
-                parallel(fadeIn(2f, Interpolation.pow2),
-                        scaleTo(2f, 2f, 2.5f, Interpolation.pow5),
-                        moveTo(400, 400, 2f, Interpolation.swing))));
-
-        gameOverStage.addActor(gameOvr);
-
-        lifeDurationLabel = new Label("You Survived "+ PlayerStatus.getDuration()+" Days", skin, "sideInfo");
-        lifeDurationLabel.setPosition(475, 420);
-        lifeDurationLabel.addAction(sequence(alpha(0), delay(2f), fadeIn(4f, Interpolation.pow2)));
-        gameOverStage.addActor(lifeDurationLabel);
-    }
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, .1f, 1);
@@ -79,10 +89,10 @@ public class GameOverScreen implements Screen{
         gameOverStage.act(delta);
         gameOverStage.draw();
 
-        game.batch.begin();
+        StudentCardGame.batch.begin();
 
 
-        game.batch.end();
+        StudentCardGame.batch.end();
     }
 
     @Override

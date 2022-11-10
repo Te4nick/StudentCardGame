@@ -17,6 +17,9 @@
 	},
 	"PressStart2P1": {
 		"file": "PressStart2P(1).fnt"
+	},
+	"Big": {
+		"file": "PressStart2P(5).fnt"
 	}
 },
 "com.badlogic.gdx.graphics.Color": {
@@ -477,6 +480,9 @@
 		"font": "F16",
 		"fontColor": "Teal"
 	},
+	"bigInfo": {
+		"font": "Big"
+	},
 	"LRInfo": {
 		"font": "PressStart2P1",
 		"fontColor": "WHITE"
@@ -559,6 +565,14 @@
 	"default": {
 		"font": "PressStart2P1",
 		"fontColor": "SKY_BLUE",
+		"downFontColor": "SKY_BLUE",
+		"overFontColor": "Teal",
+		"up": "btnBLU",
+		"down": "button-pressedBLU",
+		"over": "button-overBLU"
+	},
+	"bigBtn": {
+		"font": "Big",
 		"downFontColor": "SKY_BLUE",
 		"overFontColor": "Teal",
 		"up": "btnBLU",

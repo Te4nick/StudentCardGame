@@ -100,9 +100,14 @@ public final class AssetManager {
         System.out.println(c.toString() + "\nChoose left/right option (Enter \"l\" or \"r\"):");
     }
 
-    private static boolean isEnd(String s) {
-        if (endings[0].isEmpty()) endings = Localizator.getString("endings").split(" ");
-        for (String e : endings) if (e.equals(s)) return true;
+    public static boolean isEnd(/*String s*/) {
+//        if (endings[0].isEmpty()) endings = Localizator.getString("endings").split(" ");
+//        for (String e : endings) if (e.equals(s)) return true;
+//        return false;
+        if(PlayerStatus.getStatus() != 0)
+        {
+            return true;
+        }
         return false;
     }
 

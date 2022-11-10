@@ -15,6 +15,7 @@ public class StudentCardGame extends Game {
 
 	public MainMenuScreen mainMenuScreen;
 	public GameScreen gameScreen;
+	public GameOverScreen gameOverScreen;
 
 	@Override
 	public void create() {
@@ -33,25 +34,9 @@ public class StudentCardGame extends Game {
 
 		gameScreen = new GameScreen(this);
 		mainMenuScreen = new MainMenuScreen(this);
+		gameOverScreen = new GameOverScreen(this);
 		this.setScreen(mainMenuScreen);
 	}
-
-	/*public static SpriteBatch batch;
-	Texture img;
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("Plug.jpg");
-		System.out.println(Localizator.getString("game"));
-		Gdx.graphics.setWindowedMode(1280,720);
-		// Localizator.setLocaleDefault(Localizator.LOCALE_RU);
-		// System.out.println(Localizator.getString("game"));
-		//HashMap<String, Card> deck = AssetManager.buildDeck();
-		//String[] cKeys = AssetManager.getCardKeys();
-		//System.out.println(deck.get(cKeys[2]).toString());
-		//AssetManager.startTextGame();
-	}
-*/
 	@Override
 	public void render () {
 		super.render();

@@ -58,10 +58,21 @@ public class GameScreen implements Screen {
         AssetManager.getCardKeys();
         card = AssetManager.getCard("bf");
 
+        resetStats();
         initLabels();
         initCard();
         initSpecs();
         initButtons();
+    }
+
+    private void resetStats() {
+        PlayerStatus.setDuration(0);
+        short[] newStats = new short[4];
+        for(int i  = 0; i < 4; i++)
+        {
+            newStats[i] = (short)((Math.random()*60) + 10);
+        }
+        PlayerStatus.set(newStats);
     }
 
     private void initButtons() {
@@ -74,6 +85,10 @@ public class GameScreen implements Screen {
                 cardImage.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 leftAnswer.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 PlayerStatus.update(card.getStatsL());
+                if(AssetManager.isEnd())
+                {
+                    game.setScreen(game.gameOverScreen);
+                }
                 String nc = card.getNextCardL();
                 card = AssetManager.getCard(nc);
                 updCard();
@@ -91,6 +106,10 @@ public class GameScreen implements Screen {
                 cardImage.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 rightAnswer.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 PlayerStatus.update(card.getStatsR());
+                if(AssetManager.isEnd())
+                {
+                    game.setScreen(game.gameOverScreen);
+                }
                 String nc = card.getNextCardR();
                 card = AssetManager.getCard(nc);
                 updCard();
@@ -102,6 +121,8 @@ public class GameScreen implements Screen {
 
     private void updCard() {
         cardTextue =new Texture(Gdx.files.internal(card.getSpritePath()));
+        PlayerStatus.setDuration(PlayerStatus.getDuration()+1);
+        lifeDuration.setText("Day#"+ PlayerStatus.getDuration());
         cardImage = new Image(cardTextue);
         cardImage.addAction(alpha(0));
         movedStatus = 0;
@@ -218,7 +239,7 @@ public class GameScreen implements Screen {
         stage.addActor(cardText);
 
 
-        lifeDuration = new Label("*#WEEKS SURVIVED*", skin, "sideInfo");
+        lifeDuration = new Label("Day#0", skin, "sideInfo");
         lifeDuration.setPosition(20, 600);
         lifeDuration.setSize(200, 80);
         lifeDuration.setWrap(true);

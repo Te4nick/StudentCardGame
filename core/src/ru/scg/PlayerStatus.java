@@ -18,11 +18,19 @@ public final class PlayerStatus {
         return money;
     }
 
-    private static short health = 75; // Game params 0 <= n <= 100
-    private static short mental = 35;
-    private static short study = 100;
-    private static short money = 13;
+    public static int getDuration() {
+        return duration;
+    }
 
+    public static void setDuration(int duration) {
+        PlayerStatus.duration = duration;
+    }
+    private static short health = 0; // Game params 0 <= n <= 100
+    private static short mental = 0;
+    private static short study = 0;
+    private static short money = 0;
+
+    private static int duration = 0;
     public static final short DEATH = 1;
     public static final short INSANITY = 2;
     public static final short DROPPEDOUT = 3;
@@ -43,6 +51,12 @@ public final class PlayerStatus {
         mental += data[1];
         study += data[2];
         money += data[3];
+    }
+    public static void set(short[] data) {
+        health = data[0];
+        mental = data[1];
+        study = data[2];
+        money = data[3];
     }
 
     public static short[] getParams() {

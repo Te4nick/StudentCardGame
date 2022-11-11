@@ -82,7 +82,10 @@ public class GameScreen implements Screen {
     }
 
     private void updCard(boolean leftOption) {
-        if(card.isEnding()) game.setScreen(game.gameOverScreen); // End Game Check
+        if(AssetManager.isEnding()) {
+            game.setScreen(game.gameOverScreen); // End Game Check
+            return;
+        }
         card = AssetManager.getNextCard(leftOption);
         System.out.println(card.toString());
         cardTexture = new Texture(Gdx.files.internal(card.getSpritePath()));

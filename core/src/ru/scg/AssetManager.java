@@ -78,8 +78,8 @@ public final class AssetManager {
         return getCard(key);
     }
 
-    public static boolean isEnding(Card card) {
-        return card.getNextCardL().equals("end!") && card.getNextCardR().equals("end!");
+    public static boolean isEnding() {
+        return currentCard.getLineL().isEmpty() && currentCard.getLineR().isEmpty();
     }
 
     public static void startTextGame() {

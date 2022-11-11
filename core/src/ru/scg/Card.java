@@ -44,9 +44,6 @@ public class Card {
     public byte[] getStatsR() {
         return statsR;
     }
-    public boolean isEnding() {
-        return nextCardL.equals("end!") && nextCardR.equals("end!");
-    }
 
     @Override
     public String toString() {

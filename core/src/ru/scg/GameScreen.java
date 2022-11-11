@@ -26,8 +26,8 @@ public class GameScreen implements Screen {
     private Label cardText;
     private Label lifeDuration;
     private Label additionalInfo;
-    private Label leftAnswer;
     private Label rightAnswer;
+    private Label leftAnswer;
     private Label mental;
     private Label study;
     private Label health;
@@ -38,8 +38,8 @@ public class GameScreen implements Screen {
     private Image cardImage;
     private Image mentalChangeI, studyChangeI, healthChangeI, moneyChangeI;
     private Image maskImg;
-    private Button left;
     private Button right;
+    private Button left;
     private Card card;
 
     public GameScreen(StudentCardGame game){
@@ -48,37 +48,37 @@ public class GameScreen implements Screen {
     }
 
     private void initButtons() {
-        left = new Button(skin, "invisible");
-        left.setBounds(640, 200, 220, 390);
-        left.addListener(new ClickListener(){
+        right = new Button(skin, "invisible");
+        right.setBounds(640, 200, 220, 390);
+        right.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
                 System.out.println("Left Choice");
                 cardImage.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
-                leftAnswer.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
-                PlayerStatus.update(card.getStatsL());
+                rightAnswer.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
+                PlayerStatus.update(card.getStatsR());
                 // if(card.getNextCardL().equals("end!")) game.setScreen(game.gameOverScreen); // End Game Check
                 updCard(true);
                 initButtons();
             }
         });
-        stage.addActor(left);
+        stage.addActor(right);
 
-        right = new Button(skin, "invisible");
-        right.setBounds(420, 200, 220, 390);
-        right.addListener(new ClickListener(){
+        left = new Button(skin, "invisible");
+        left.setBounds(420, 200, 220, 390);
+        left.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
                 System.out.println("Right Choice");
                 cardImage.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
-                rightAnswer.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
-                PlayerStatus.update(card.getStatsR());
+                leftAnswer.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
+                PlayerStatus.update(card.getStatsL());
                 // if(card.getNextCardR().equals("end!")) game.setScreen(game.gameOverScreen); // End Game Check
                 updCard(false);
                 initButtons();
             }
         });
-        stage.addActor(right);
+        stage.addActor(left);
     }
 
     private void updCard(boolean leftOption) {
@@ -93,11 +93,11 @@ public class GameScreen implements Screen {
         cardImage.setDrawable(new SpriteDrawable(new Sprite(cardTexture)));
         if (movedStatus == 2) {
             cardImage.addAction(parallel(moveBy(140, 0, .5f), rotateBy(-5f, .5f))/*run(transitionRunnable)*/);
-            rightAnswer.addAction(parallel(moveBy(90, -80, .5f, Interpolation.pow2), alpha(0, .5f)));
+            leftAnswer.addAction(parallel(moveBy(90, -80, .5f, Interpolation.pow2), alpha(0, .5f)));
             movedStatus = 0;
         } else if (movedStatus == 1) {
             cardImage.addAction(parallel(moveBy(-140, 0, .5f), rotateBy(5f, .5f))/*run(transitionRunnable)*/);
-            leftAnswer.addAction(parallel(moveBy(-90, 60, .5f, Interpolation.pow2), alpha(0, .5f)));
+            rightAnswer.addAction(parallel(moveBy(-90, 60, .5f, Interpolation.pow2), alpha(0, .5f)));
             movedStatus = 0;
         }
         cardImage.addAction(alpha(0));
@@ -108,44 +108,47 @@ public class GameScreen implements Screen {
 
         lifeDuration.setText("Day#"+ PlayerStatus.getDuration());
 
-        leftAnswer = new Label(card.getLineL(), skin, "LRInfo");
-        leftAnswer.addAction(alpha(0));
-        leftAnswer.setSize(420, 50);
-        leftAnswer.setPosition(430, 530);
-        leftAnswer.setWrap(true);
-        leftAnswer.addAction(alpha(0));
-        movedStatus = 0;
-        stage.addActor(leftAnswer);
-
         rightAnswer = new Label(card.getLineR(), skin, "LRInfo");
         rightAnswer.addAction(alpha(0));
         rightAnswer.setSize(420, 50);
-        rightAnswer.setPosition(430, 450);
+        rightAnswer.setPosition(430, 530);
         rightAnswer.setWrap(true);
         rightAnswer.addAction(alpha(0));
+        movedStatus = 0;
         stage.addActor(rightAnswer);
+
+        leftAnswer = new Label(card.getLineL(), skin, "LRInfo");
+        leftAnswer.addAction(alpha(0));
+        leftAnswer.setSize(420, 50);
+        leftAnswer.setPosition(430, 450);
+        leftAnswer.setWrap(true);
+        leftAnswer.addAction(alpha(0));
+        stage.addActor(leftAnswer);
     }
 
     private void initCard() {
         cardTexture =new Texture(Gdx.files.internal(card.getSpritePath()));
         cardImage = new Image(cardTexture);
         cardImage.setSize(440, 390);
+        cardImage.setOrigin(220, -500);
         cardImage.setPosition(420, 200);
         stage.addActor(cardImage);
 
-        leftAnswer = new Label(card.getLineL(), skin, "LRInfo");
-        leftAnswer.setSize(420, 50);
-        leftAnswer.setPosition(430, 530);
-        leftAnswer.setWrap(true);
-        leftAnswer.addAction(alpha(0));
-        stage.addActor(leftAnswer);
-
         rightAnswer = new Label(card.getLineR(), skin, "LRInfo");
         rightAnswer.setSize(420, 50);
-        rightAnswer.setPosition(430, 450);
+        rightAnswer.setOrigin(210, -500);
+        rightAnswer.setPosition(430, 530);
         rightAnswer.setWrap(true);
         rightAnswer.addAction(alpha(0));
         stage.addActor(rightAnswer);
+
+        leftAnswer = new Label(card.getLineL(), skin, "LRInfo");
+        leftAnswer.setSize(420, 50);
+        leftAnswer.setOrigin(210, -500);
+        leftAnswer.setPosition(430, 450);
+        leftAnswer.setWrap(true);
+        leftAnswer.addAction(alpha(0));
+        stage.addActor(leftAnswer);
         System.out.println(card.toString());
     }
 
@@ -274,8 +277,8 @@ public class GameScreen implements Screen {
         // TODO: add Stacks w labels and card image
         if (Gdx.input.getX() > 400 && Gdx.input.getX() < 600 && movedStatus != 2 && Gdx.input.getY() > 120 && Gdx.input.getY() < 520) {
             cardImage.addAction(parallel(moveBy(-70, 0, .5f, Interpolation.pow2), rotateBy(5f, .5f))/*run(transitionRunnable)*/);
-            rightAnswer.addAction(parallel(moveBy(-90, 80, .5f, Interpolation.pow2), alpha(1, .5f)));
-            byte[] stats = card.getStatsR();
+            leftAnswer.addAction(parallel(moveBy(-130, 65, .5f, Interpolation.pow2), alpha(1, .5f)));
+            byte[] stats = card.getStatsL();
             if(stats[0] != 0) healthChangeI.addAction(alpha(1, .5f));
             if(stats[1] != 0) mentalChangeI.addAction(alpha(1, .5f));
             if(stats[2] != 0) studyChangeI.addAction(alpha(1, .5f));
@@ -283,8 +286,8 @@ public class GameScreen implements Screen {
             movedStatus = 2;
         } else if (Gdx.input.getX() < 880 && Gdx.input.getX() > 680 && movedStatus != 1 && Gdx.input.getY() > 120 && Gdx.input.getY() < 520) {
             cardImage.addAction(parallel(moveBy(70, 0, .5f, Interpolation.pow2), rotateBy(-5f, .5f))/*run(transitionRunnable)*/);
-            leftAnswer.addAction(parallel(moveBy(90, -60, .5f, Interpolation.pow2), alpha(1, .5f)));
-            byte[] stats = card.getStatsL();
+            rightAnswer.addAction(parallel(moveBy(150, -50, .5f, Interpolation.pow2), alpha(1, .5f)));
+            byte[] stats = card.getStatsR();
             if(stats[0] != 0) healthChangeI.addAction(alpha(1, .5f));
             if(stats[1] != 0) mentalChangeI.addAction(alpha(1, .5f));
             if(stats[2] != 0) studyChangeI.addAction(alpha(1, .5f));
@@ -297,7 +300,7 @@ public class GameScreen implements Screen {
                 studyChangeI.addAction(alpha(0, .5f));
                 moneyChangeI.addAction(alpha(0, .5f));
                 cardImage.addAction(parallel(moveBy(70, 0, .5f), rotateBy(-5f, .5f))/*run(transitionRunnable)*/);
-                rightAnswer.addAction(parallel(moveBy(90, -80, .5f, Interpolation.pow2), alpha(0, .5f)));
+                leftAnswer.addAction(parallel(moveBy(130, -65, .5f, Interpolation.pow2), alpha(0, .5f)));
                 movedStatus = 0;
             } else if (movedStatus == 1) {
                 healthChangeI.addAction(alpha(0, .5f));
@@ -305,7 +308,7 @@ public class GameScreen implements Screen {
                 studyChangeI.addAction(alpha(0, .5f));
                 moneyChangeI.addAction(alpha(0, .5f));
                 cardImage.addAction(parallel(moveBy(-70, 0, .5f), rotateBy(5f, .5f))/*run(transitionRunnable)*/);
-                leftAnswer.addAction(parallel(moveBy(-90, 60, .5f, Interpolation.pow2), alpha(0, .5f)));
+                rightAnswer.addAction(parallel(moveBy(-150, 50, .5f, Interpolation.pow2), alpha(0, .5f)));
                 movedStatus = 0;
             }
         }

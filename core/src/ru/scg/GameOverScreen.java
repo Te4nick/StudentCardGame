@@ -66,7 +66,7 @@ public class GameOverScreen implements Screen{
         Label lifeDurationLabel = new Label(String.format(
                 Localizator.getString("lifeDurationLabel"), PlayerStatus.getDuration()), skin,
                 "sideInfo");
-        lifeDurationLabel.setPosition(475, 420);
+        lifeDurationLabel.setPosition(495, 420);
         lifeDurationLabel.addAction(sequence(alpha(0), delay(2f), fadeIn(4f, Interpolation.pow2)));
         gameOverStage.addActor(lifeDurationLabel);
     }

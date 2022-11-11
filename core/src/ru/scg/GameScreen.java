@@ -57,7 +57,7 @@ public class GameScreen implements Screen {
                 cardImage.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 leftAnswer.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 PlayerStatus.update(card.getStatsL());
-                if(card.getNextCardL().equals("end")) game.setScreen(game.gameOverScreen); // End Game Check
+                // if(card.getNextCardL().equals("end!")) game.setScreen(game.gameOverScreen); // End Game Check
                 updCard(true);
                 initButtons();
             }
@@ -73,7 +73,7 @@ public class GameScreen implements Screen {
                 cardImage.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 rightAnswer.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 PlayerStatus.update(card.getStatsR());
-                if(card.getNextCardR().equals("end")) game.setScreen(game.gameOverScreen); // End Game Check
+                // if(card.getNextCardR().equals("end!")) game.setScreen(game.gameOverScreen); // End Game Check
                 updCard(false);
                 initButtons();
             }
@@ -82,7 +82,9 @@ public class GameScreen implements Screen {
     }
 
     private void updCard(boolean leftOption) {
+        if(card.isEnding()) game.setScreen(game.gameOverScreen); // End Game Check
         card = AssetManager.getNextCard(leftOption);
+        System.out.println(card.toString());
         cardTexture = new Texture(Gdx.files.internal(card.getSpritePath()));
         PlayerStatus.incrementDuration();
         cardImage.setDrawable(new SpriteDrawable(new Sprite(cardTexture)));
@@ -141,6 +143,7 @@ public class GameScreen implements Screen {
         rightAnswer.setWrap(true);
         rightAnswer.addAction(alpha(0));
         stage.addActor(rightAnswer);
+        System.out.println(card.toString());
     }
 
     private void initSpecs() {
@@ -330,7 +333,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        game.dispose();
         stage.dispose();
         skin.dispose();
     }

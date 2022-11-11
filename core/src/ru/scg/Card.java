@@ -32,20 +32,20 @@ public class Card {
     public String getLineM() {
         return lineM;
     }
-
     public String getLineL() {
         return lineL;
     }
-
     public String getLineR() {
         return lineR;
     }
-
     public byte[] getStatsL() {
         return statsL;
     }
     public byte[] getStatsR() {
         return statsR;
+    }
+    public boolean isEnding() {
+        return nextCardL.equals("end!") && nextCardR.equals("end!");
     }
 
     @Override
@@ -56,7 +56,9 @@ public class Card {
                 "\nCharacter: " + character +
                 "\nSprite: " + spritePath +
                 "\nStatsL: [ " + statsL[0] + " " + statsL[1] + " " + statsL[2] + " " + statsL[3] + " ]" +
-                "\nStatsR: [ " + statsR[0] + " " + statsR[1] + " " + statsR[2] + " " + statsR[3] + " ]";
+                "\nStatsR: [ " + statsR[0] + " " + statsR[1] + " " + statsR[2] + " " + statsR[3] + " ]" +
+                "\nNextCardL: " + nextCardL +
+                "\nNextCardR: " + nextCardR;
     }
 
     public String getNextCardL() {

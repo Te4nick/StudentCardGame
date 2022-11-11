@@ -4,6 +4,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveBy;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.parallel;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ import java.util.Scanner;
 public final class AssetManager {
 
     private static String[] cardKeys;
+    private static String[] endingKeys;
     private static Card currentCard;
 
     public static HashMap<String, Card> buildDeck() {
@@ -35,10 +37,15 @@ public final class AssetManager {
         return cardKeys;
     }
 
+    public static String[] getEndingKeys() {
+        return endingKeys;
+    }
+
     public static Card getCard(String key) { // NOTE: run getCardKeys() first
         byte[] statsL = new byte[4], statsR = new byte[4];
         String[] lines, stats;
         lines = Localizator.getString(key).split("\n");
+        for (int i = 0; i < 7; i++) lines[i] = lines[i].trim();
         stats = lines[5].split(" ");
         for (int i = 0; i < 8; i++) {
             if (i < 4) statsL[i] = Byte.parseByte(stats[i]);
@@ -49,19 +56,19 @@ public final class AssetManager {
     }
 
     public static Card getNextCard(boolean leftOption) { // NOTE: run getCardKeys() first
-        String[] defaultEndings = Localizator.getString("defaultEndings").split(" "); String key;
+        endingKeys = Localizator.getString("endings").split(" "); String key;
         switch (PlayerStatus.getStatus()) {
             case PlayerStatus.ZEROPARAM1:
-                key = defaultEndings[0];
+                key = endingKeys[0];
                 break;
             case PlayerStatus.ZEROPARAM2:
-                key = defaultEndings[1];
+                key = endingKeys[1];
                 break;
             case PlayerStatus.ZEROPARAM3:
-                key = defaultEndings[2];
+                key = endingKeys[2];
                 break;
             case PlayerStatus.ZEROPARAM4:
-                key = defaultEndings[3];
+                key = endingKeys[3];
                 break;
             default:
                 if (leftOption) key = currentCard.getNextCardL();
@@ -69,6 +76,10 @@ public final class AssetManager {
                 break;
         }
         return getCard(key);
+    }
+
+    public static boolean isEnding(Card card) {
+        return card.getNextCardL().equals("end!") && card.getNextCardR().equals("end!");
     }
 
     public static void startTextGame() {

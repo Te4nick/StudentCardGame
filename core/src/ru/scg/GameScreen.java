@@ -58,7 +58,7 @@ public class GameScreen implements Screen {
                 rightAnswer.addAction(parallel(moveBy(150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 PlayerStatus.update(card.getStatsR());
                 // if(card.getNextCardL().equals("end!")) game.setScreen(game.gameOverScreen); // End Game Check
-                updCard(true);
+                updCard(false);
                 initButtons();
             }
         });
@@ -74,7 +74,7 @@ public class GameScreen implements Screen {
                 leftAnswer.addAction(parallel(moveBy(-150, 0, .5f, Interpolation.pow2), alpha(0, .5f, Interpolation.pow2)));
                 PlayerStatus.update(card.getStatsL());
                 // if(card.getNextCardR().equals("end!")) game.setScreen(game.gameOverScreen); // End Game Check
-                updCard(false);
+                updCard(true);
                 initButtons();
             }
         });
@@ -106,7 +106,7 @@ public class GameScreen implements Screen {
         cardImage.setPosition(420, 200);
         stage.addActor(cardImage);
 
-        lifeDuration.setText("Day#"+ PlayerStatus.getDuration());
+        lifeDuration.setText(String.format(Localizator.getString("day"), PlayerStatus.getDuration()));
 
         rightAnswer = new Label(card.getLineR(), skin, "LRInfo");
         rightAnswer.addAction(alpha(0));
@@ -173,7 +173,7 @@ public class GameScreen implements Screen {
         money.setSize(100, 15+80);
         stage.addActor(money);
 
-        mask = new Texture(Gdx.files.internal("Mask.png"));
+        mask = new Texture(Gdx.files.internal("UI/Mask.png"));
         maskImg = new Image(mask);
         maskImg.setPosition(420, 600);
         maskImg.setSize(440, 100);
@@ -257,7 +257,7 @@ public class GameScreen implements Screen {
         stage.clear();
 
         AssetManager.getCardKeys();
-        card = AssetManager.getCard("bf");
+        card = AssetManager.getCard("wu");
 
         PlayerStatus.resetStats();
         initLabels();

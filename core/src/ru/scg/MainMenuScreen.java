@@ -1,6 +1,8 @@
 package ru.scg;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -47,8 +49,8 @@ public class MainMenuScreen implements Screen {
             }
         };
 
-        logo = new Texture("Logo.png");
-        background = new Texture("MenuBackground.jpg");
+        logo = new Texture("UI/mainmenu/Logo.png");
+        background = new Texture("UI/mainmenu/MenuBackground.jpg");
 
         backgroundImg = new Image(background);
         stage.addActor(backgroundImg);
@@ -97,7 +99,7 @@ public class MainMenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
         stage.draw();
-
+        if (Gdx.input.isKeyPressed(Input.Keys.F)) Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
         game.batch.begin();
 
 

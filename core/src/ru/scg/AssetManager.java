@@ -14,6 +14,7 @@ public final class AssetManager {
     private static String[] cardKeys;
     private static String[] endingKeys;
     private static Card currentCard;
+    private static Random r = new Random();
 
     public static HashMap<String, Card> buildDeck() {
         HashMap<String, Card> d = new HashMap<>();
@@ -75,17 +76,17 @@ public final class AssetManager {
                 else key = currentCard.getNextCardR();
                 break;
         }
+        if (key.equals(Localizator.getString("anyKey"))) return getCard(cardKeys[r.nextInt(cardKeys.length)]);
         return getCard(key);
     }
 
     public static boolean isEnding() {
-        return currentCard.getLineL().isEmpty() && currentCard.getLineR().isEmpty();
+        return currentCard.getNextCardR().equals(Localizator.getString("endKey")) && currentCard.getNextCardR().equals(Localizator.getString("endKey"));
     }
 
     public static void startTextGame() {
         getCardKeys();
         Card c = getCard(cardKeys[0]);
-        Random r = new Random();
         int cardKeysLength = cardKeys.length;
         boolean run = true;
         String choice;

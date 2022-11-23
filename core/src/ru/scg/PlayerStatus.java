@@ -31,18 +31,18 @@ public final class PlayerStatus {
     }
 
     public static short update(byte[] data) {
-        health += data[0];
-        if (health > 100) health = 100;
-        if (health < 0) health = 0;
-        mental += data[1];
-        if (mental > 100) mental = 100;
-        if (mental < 0) mental = 0;
-        study += data[2];
-        if (study > 100) study = 100;
-        if (study < 0) study = 0;
-        money += data[3];
-        if (money > 100) money = 100;
-        if (money < 0) money = 0;
+        if (health + data[0] > 100) health = 100;
+        else if (health + data[0] < 0) health = 0;
+        else health += data[0];
+        if (mental + data[1] > 100) mental = 100;
+        else if (mental + data[1] < 0) mental = 0;
+        else mental += data[1];
+        if (study + data[2] > 100) study = 100;
+        else if (study + data[2] < 0) study = 0;
+        else study += data[2];
+        if (money + data[3] > 100) money = 100;
+        else if (money + data[3] < 0) money = 0;
+        else money += data[3];
         return getStatus();
     }
 
